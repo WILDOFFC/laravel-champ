@@ -1,0 +1,6 @@
+POST 127.0.0.1:8000/api/courses/1/buy
+Content-Type: application/json
+
+{
+    "user_id": 1
+}

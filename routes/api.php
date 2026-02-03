@@ -15,5 +15,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/courses/{course}', [LessonController::class, 'index']);
     Route::post('/courses/{course}/buy', [CourseController::class, 'buyCourse']);
     Route::post('/orders', [OrderController::class, 'getUserCourses']);
-    Route::get('/orders/{order}', [OrderController::class, 'cancel']);
+    Route::get('/orders/{orders}', [OrderController::class, 'cancel']);
 });

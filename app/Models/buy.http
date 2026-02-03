@@ -1,0 +1,7 @@
+POST http://127.0.0.1:8000/api/courses/1/buy
+Content-Type: application/json
+Authorization: Bearer "3|McuT9bkMjjijGb3mWwKpbn4hivZbfFIVQzU4tdVc38a0cd3d"
+
+{}
+
+###

@@ -1,0 +1,10 @@
+POST http://127.0.0.1:8000/api/registr
+Content-Type: application/json
+
+{
+    "email": "user@mail.ru",
+    "password": "1Aa_",
+    "name": "user"
+}
+
+###

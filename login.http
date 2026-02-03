@@ -2,6 +2,6 @@ POST http://127.0.0.1:8000/api/auth
 Content-Type: application/json
 
 {
-    "email": "seesafafa@gmail.com",
-    "password": "Kffdsfdp431$"
+    "email": "user@mail.ru",
+    "password": "1Aa_"
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\StatusEnum;
+use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -11,10 +12,10 @@ class OrderController extends Controller
 {
     public function getUserCourses(Request $request): JsonResponse
     {
-        $courses = $request->user()->orders;
+        $orders = $request->user()->orders;
 
         return response()->json([
-            'data' => $courses,
+            'data' => OrderResource::collection($orders),
         ]);
     }
 

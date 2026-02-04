@@ -9,7 +9,7 @@ Route::post('/courses/auth', [LoginController::class, 'login'])->name('orders.lo
 
 Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
 Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
-Route::get('/courses/list', [CourseController::class, 'listCourses'])->name('courses.list');
+Route::get('/courses', [CourseController::class, 'listCourses'])->name('courses.list');
 Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
 Route::get('/courses/{course}', [CourseController::class, 'edit'])->name('courses.edit');
 Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');

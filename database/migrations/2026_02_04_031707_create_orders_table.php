@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\User::class)->constrained();
             $table->foreignIdFor(\App\Models\Course::class)->constrained();
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@ class LessonRequest extends FormRequest
             'name'=>['required', 'max: 50'],
             'description'=>['required'],
             'video_link'=>['nullable'],
-            'hours'=>['required', 'max: 4']
+            'hours'=>['required', 'max:4']
         ];
     }
 }

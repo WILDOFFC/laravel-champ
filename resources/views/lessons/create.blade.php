@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-<form action="{{ route('lessons.store') }}" method="POST">
+<form action="{{ route('lessons.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="text" name="name">
     <textarea name="description" id="desc" cols="30" rows="10"></textarea>

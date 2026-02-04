@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-<form action="{{ route('lessons.update', $lesson) }}" method="POST">
+<form action="{{ route('lessons.update', $lesson) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
     <input type="text" name="name" value="{{ $lesson->name }}">

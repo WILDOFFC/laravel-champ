@@ -17,7 +17,7 @@
     <input type="number" name="price" value="{{ $course->price }}">
     <input type="date" name="start_date" value="{{ $course->start_date->format('Y-m-d') }}">
     <input type="date" name="end_date" value="{{ $course->end_date->format('Y-m-d') }}">
-    <input type="file" name="img" accept="image/*" value="{{ $course->img }}">
+    <input type="file" name="img" accept="image/*">
     <input type="submit" value="Изменить">
 </form>
 </body>

@@ -7,6 +7,7 @@ use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
@@ -32,5 +33,12 @@ class OrderController extends Controller
         return response()->json([
             'status' => 'success',
         ]);
+    }
+
+    public function list(): View
+    {
+        $orders = Order::all();
+
+        return view('orders.list', ['orders'=>$orders]);
     }
 }

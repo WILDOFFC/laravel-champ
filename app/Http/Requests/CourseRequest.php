@@ -15,7 +15,7 @@ class CourseRequest extends FormRequest
             'price' => ['required', 'min: 100', 'integer'],
             'start_date' => ['required'],
             'end_date' => ['required'],
-            'img' => ['required', 'image', 'mimes: jpg, jpeg', 'max: 2000'],
+            'img' => ['required', 'image', 'mimes:jpg,jpeg', 'max:2000'],
         ];
     }
 }

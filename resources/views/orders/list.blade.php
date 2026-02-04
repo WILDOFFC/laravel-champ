@@ -8,12 +8,14 @@
     <title>Document</title>
 </head>
 <body>
-@foreach($users as $user)
-    <h1>{{ $user->email }}</h1>
-    <h1>{{ $user->name }}</h1>
-    <h2>{{ $user->course->name }}</h2>
-    <h2>{{ $user->course->start_date }}</h2>
-    <h2>{{ $user-> }}</h2>
+@foreach($orders as $order)
+    <h1>{{ $order->user->email }}</h1>
+    <h1>{{ $order->user->name }}</h1>
+    <h2>{{ $order->course->name }}</h2>
+    <h2>{{ $order->course->start_date }}</h2>
+    <h2>{{ $order->course->end_date}}</h2>
+    <h3>{{ $order->order->created_at }}</h3>
+    <h4>{{ $order->order->status }}</h4>
 @endforeach
 </body>
 </html>

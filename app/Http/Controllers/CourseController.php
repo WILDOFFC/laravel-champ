@@ -13,7 +13,9 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -47,6 +49,7 @@ class CourseController extends Controller
 
     public function store(CourseRequest $request): RedirectResponse
     {
+        $path = $this->convertImage($request->file('img'));
         Course::create([
             'name'=>$request->name,
             'description'=>$request->description,
@@ -54,9 +57,8 @@ class CourseController extends Controller
             'price'=>$request->price,
             'start_date'=>$request->start_date,
             'end_date'=>$request->end_date,
-            'img'=>$request->img
+            'img'=>$path,
         ]);
-
         return redirect()->route('courses.list');
     }
 
@@ -67,6 +69,11 @@ class CourseController extends Controller
 
     public function update(CourseRequest $request, Course $course): RedirectResponse
     {
+        if ($request->hasFile('image')) {
+            Storage::disk('public')->delete($course->image);
+            $path = $this->convertImage($request->file('img'));
+        }
+
         $course->update([
             'name'=>$request->name,
             'description'=>$request->description,
@@ -74,7 +81,7 @@ class CourseController extends Controller
             'price'=>$request->price,
             'start_date'=>$request->start_date,
             'end_date'=>$request->end_date,
-            'img'=>$request->img
+            'img'=>$path ?? $course->image,
         ]);
 
         return redirect()->route('courses.list');
@@ -105,5 +112,49 @@ class CourseController extends Controller
         ]);
 
         return response()->json(['pay_url' => 'pay_' . uniqid()]);
+    }
+
+    private function convertImage(UploadedFile $image):string
+    {
+        $tempPath = $image->getRealPath();
+
+        $src = imagecreatefromjpeg($tempPath);
+
+        $origW = imagesx($src);
+        $origH = imagesy($src);
+
+        $maxSize = 300;
+
+        $ratio = min($maxSize / $origW, $maxSize / $origH);
+
+        $newW = (int)($origW * $ratio);
+        $newH = (int)($origH * $ratio);
+
+        $dst = imagecreatetruecolor($newW, $newH);
+
+        imagecopyresampled(
+            $dst,
+            $src,
+            0, 0,
+            0, 0,
+            $newW, $newH,
+            $origW, $origH
+        );
+
+        $path = 'images/mpic_' . uniqid() . '.' . $image->extension();
+
+        $absolutePath = Storage::disk('public')->path($path);
+
+        $directory = dirname($absolutePath);
+
+        if (!is_dir($directory)) {
+            mkdir($directory, 0755, true);
+        }
+
+        imagejpeg($dst, $absolutePath);
+
+        imagedestroy($src);
+        imagedestroy($dst);
+        return $path;
     }
 }
